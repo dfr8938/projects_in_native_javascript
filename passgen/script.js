@@ -2,7 +2,8 @@ const btnPassGen = document.querySelector('.btn-passgen'),
     btnPassClear = document.querySelector('.btn-passclear'),
     inputPass = document.querySelector('.input-pass'),
     square = document.querySelector('.far.fa-square'),
-    checkSquare = document.querySelector('.far.fa-check-square');
+    checkSquare = document.querySelector('.far.fa-check-square'),
+    size = document.querySelector('.input-size');
 
 let chars = '0123456789';
 chars += 'abcdefghijklmnopqrstvuxyzw';
@@ -11,10 +12,13 @@ chars += 'ABCDEFGHIJKLMNOPQRSTVUXYZW';
 const symbols = '!@#$%^&()_+?><:{}[]';
 const sumCharsSymbols = chars + symbols;
 
-btnPassGen.addEventListener('click', () => {
-
-    checkSquare.style.display === `block` ? outRandomChars(22, sumCharsSymbols) : outRandomChars(22, chars);
-});
+if (size.value === '' || size.value === '0') {
+    inputPass.value = 'Enter size!';
+} else {
+    btnPassGen.addEventListener('click', () => {
+        checkSquare.style.display === `block` ? outRandomChars(Number.parseInt(size.value), sumCharsSymbols) : outRandomChars(Number.parseInt(size.value), chars);
+    });
+}
 
 btnPassClear.addEventListener('click', () => {
     inputPass.value = '';
